@@ -108,22 +108,29 @@ migrate_unformatted_to_output <- function(data,
 
     if (inherits(data_tbl[[colname]], "list")) {
 
+
       # Use `lapply()` so that all values could be treated independently
       body[[colname]][row_index] <-
         lapply(
           data_tbl[[colname]][row_index],
           function(x) {
+            if (inherits(x, "gg") && context == "html") {
 
-            if (is.numeric(x)) {
-              x <- format(x, drop0trailing = FALSE, trim = TRUE, justify = "none")
-            }
+              x %>% ggplot_image()
 
-            x %>%
-              tidy_gsub("\\s+$", "") %>%
-              process_text(context) %>%
-              paste(collapse = ", ")
+            } else {
+
+              if (is.numeric(x)) {
+                x <- format(x, drop0trailing = FALSE, trim = TRUE, justify = "none")
+              }
+
+              x %>%
+                tidy_gsub("\\s+$", "") %>%
+                process_text(context) %>%
+                paste(collapse = ", ")
           }
-        )
+        }
+      )
 
     } else {
 
