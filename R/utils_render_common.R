@@ -114,6 +114,7 @@ migrate_unformatted_to_output <- function(data,
         lapply(
           data_tbl[[colname]][row_index],
           function(x) {
+
             if (inherits(x, "gg") && context == "html") {
 
               x %>% ggplot_image()
