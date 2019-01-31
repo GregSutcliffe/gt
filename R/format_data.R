@@ -1526,11 +1526,13 @@ fmt_ggplot <- fmt_gg <- function(data,
         },
         latex = function(x) {
 
-          stop("This formatter is not yet implemented for LaTeX output.", call. = FALSE)
+          stop("This formatter is not yet implemented for LaTeX output.",
+               call. = FALSE)
         },
         default = function(x) {
 
-          stop("This formatter is not yet implemented.", call. = FALSE)
+          stop("This formatter is not yet implemented.",
+               call. = FALSE)
         }
       ))
 
